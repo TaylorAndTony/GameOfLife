@@ -62,13 +62,14 @@ class GameOfLife:
         # 更新
         self.screen = new_screen
 
-    def immediate_check_screen(self, on='#') -> None:
+    def immediate_check_screen(self, on='██', off='  ') -> None:
         """ 立即查看当前地图 """
         for line in self.screen:
             for pix in line:
                 # 用 char 替代活细胞
-                char = on if pix else ' '
-                print(char, ' ', end='')
+                # ■□
+                char = on if pix else off
+                print(char, end='')
             print()
 
     def update_and_check(self, sleep=None) -> None:
@@ -87,6 +88,6 @@ class GameOfLife:
 
 
 if __name__ == '__main__':
-    game = GameOfLife(10, 10)
-    game.random_init()
-    game.update_generations(10)
+    game = GameOfLife(15, 15)
+    game.random_init(0.15)
+    game.update_generations(10, 0.5)
