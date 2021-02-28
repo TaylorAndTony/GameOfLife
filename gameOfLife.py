@@ -11,6 +11,14 @@ class GameOfLife:
         self.screen = [[0 for _ in range(self.width)]
                        for _ in range(self.height)]
 
+    def manual_set_map(self, target_map: list):
+        """ 手动设定当前帧，一个只有 1 和 0 的二维列表 """
+        if len(target_map) != self.height:
+            raise ValueError('手动设定的高度与创建的高度不符')
+        if len(target_map[0]) != self.width:
+            raise ValueError('手动设定的宽度与创建的高度不符')
+        self.screen = target_map
+
     def random_init(self, is_alive=0.3):
         """ 随机化地图，使用 is_alive 控制活细胞概率 """
         for line in range(self.height):
@@ -88,6 +96,15 @@ class GameOfLife:
 
 
 if __name__ == '__main__':
-    game = GameOfLife(15, 15)
-    game.random_init(0.15)
-    game.update_generations(10, 0.5)
+    game = GameOfLife(8, 8)
+    game.manual_set_map([
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [1, 0, 1, 0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+    ])
+    game.update_generations(50, 0.1)
